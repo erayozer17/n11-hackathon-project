@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Buyer Screen</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">SNAKES</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="http://localhost:8080/buyer">Search</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="http://localhost:8080/product">Product List</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="http://localhost:8080/seller">Product CRUD</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <h3>Search</h3>
+            <form action="#" th:action="@{/search.do}" method="post">
+                <table class="table">
+
+                    <tr>
+                        <td><input type="radio" th:name="selection" value="title" />Title</td>
+                        <td><input type="radio" th:name="selection" value="subtitle" />Subtitle</td>
+                        <td><input type="radio" th:name="selection" value="category" />Category</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="width:100%;"><input type="text" th:name="query" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><input class="btn" type="submit" value="Ara" /></td>
+                    </tr>
+
+                </table>
+            </form>
+
+            <table class="table">
+
+                <tr>
+                    <td># </td>
+                    <td>ID </td>
+                    <td>Title </td>
+                    <td>Subtitle </td>
+                    <td>Price </td>
+                    <td>Category </td>
+                    <td>Discount Price</td>
+                </tr>
+                <tr th:each="pro,iterationStatus  : ${searchRes}">
+
+                    <td th:text="${iterationStatus.count}">1</td>
+
+                    <td th:text="${pro.id}"></td>
+
+                    <td th:text="${pro.title}"></td>
+
+                    <td th:text="${pro.subtitle}"></td>
+
+                    <td th:text="${pro.price}"></td>
+
+                    <td th:text="${pro.category}"></td>
+
+                    <td th:text="${pro.disCount}"></td>
+
+                </tr>
+
+
+
+            </table>
+        </div>
+        <div class="container col-lg-6">
+            <h2>All Products</h2>
+            <table class="table table-striped">
+
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Subtitle</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Discount Price</th>
+                </tr>
+                </thead>
+
+                <tr th:each="pro,iterationStatus  : ${productList}">
+
+                    <th scope="row" th:text="${iterationStatus.count}">1</th>
+
+                    <td th:text="${pro.id}"></td>
+
+                    <td th:text="${pro.title}"></td>
+
+                    <td th:text="${pro.subtitle}"></td>
+
+                    <td th:text="${pro.price}"></td>
+
+                    <td th:text="${pro.category}"></td>
+
+                    <td th:text="${pro.disCount}"></td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
